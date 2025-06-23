@@ -10,7 +10,8 @@ RUN npm run build --configuration=production
 FROM nginx:alpine
 
 # Copiamos los archivos generados al directorio público de Nginx
-COPY --from=build /app/dist/front-extra /usr/share/nginx/html
+COPY --from=build /app/dist/browser /usr/share/nginx/html
+
 
 # Reemplazamos la configuración por defecto de Nginx con la personalizada
 COPY nginx.conf /etc/nginx/conf.d/default.conf
