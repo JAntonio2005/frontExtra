@@ -1,0 +1,33 @@
+<div class="login-container">
+  <div class="login-card">
+    <h2>Iniciar Sesión</h2>
+
+    <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
+      <input
+        type="text"
+        name="username"
+        [(ngModel)]="form.username"
+        placeholder="Usuario"
+        required
+      />
+
+      <input
+        type="password"
+        name="password"
+        [(ngModel)]="form.password"
+        placeholder="Contraseña"
+        required
+      />
+    <button type="submit" [disabled]="loginForm.invalid">Entrar</button>
+
+<p class="register-link">
+  ¿No tienes cuenta?
+  <a routerLink="/register">Crea una</a>
+</p>
+
+    
+    </form>
+
+    <p *ngIf="isLoginFailed" class="error-msg">Credenciales inválidas</p>
+  </div>
+</div>

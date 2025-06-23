@@ -1,0 +1,52 @@
+<div class="container">
+  <div class="header-bar">
+    <h2>Bienvenido, {{ username }} 🎓</h2>
+    <button class="logout" (click)="logout()">Cerrar sesión</button>
+  </div>
+
+  <button class="new" (click)="abrirNuevo()">Nuevo Alumno</button>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Correo</th>
+        <th>Carrera</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let alumno of alumnos">
+        <td>{{ alumno.nombre }}</td>
+        <td>{{ alumno.correo }}</td>
+        <td>{{ alumno.carrera }}</td>
+        <td>
+          <button class="edit" (click)="editarAlumno(alumno)">Editar</button>
+          <button class="delete" (click)="eliminarAlumno(alumno.id!)">Eliminar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- MODAL -->
+<div class="modal-backdrop" *ngIf="mostrarDialogo">
+  <div class="modal">
+    <h3>{{ alumno.id ? 'Editar Alumno' : 'Nuevo Alumno' }}</h3>
+    <form (ngSubmit)="guardarAlumno()">
+      <label>Nombre</label>
+      <input [(ngModel)]="alumno.nombre" name="nombre" required>
+
+      <label>Correo</label>
+      <input [(ngModel)]="alumno.correo" name="correo" required>
+
+      <label>Carrera</label>
+      <input [(ngModel)]="alumno.carrera" name="carrera" required>
+
+      <div class="actions">
+        <button type="submit" class="edit">Guardar</button>
+        <button type="button" class="delete" (click)="mostrarDialogo = false">Cancelar</button>
+      </div>
+    </form>
+  </div>
+</div>
